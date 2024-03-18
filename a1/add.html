@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hikes Victoria - Add Hike</title>
-    <!-- Link to Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ysabeau+SC&family=Exo&display=swap">
-    <!-- Link to Material Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ysabeau+SC">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Exo">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Permanent+Marker">
     <!-- Link to common CSS file -->
     <link rel="stylesheet" href="style.css">
     <!-- Link to common JavaScript file -->
-    <script src="main.js"></script>
+    <script src="menu.js"></script>
 </head>
 <body>
-    <!-- Header with navigation and search form -->
     <header>
         <nav>
             <!-- Logo linking to index.html -->
@@ -27,12 +26,13 @@
                 <button type="submit">Search</button>
             </form>
             <!-- Dropdown menu for navigation -->
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="hikes.html">Hikes</a></li>
-                <li><a href="add.html">Add more</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-            </ul>
+            <select id="pageSelect" onchange="navigateToPage()">
+                <option value="">Select a page</option>
+                <option value="index.html">Home</option>
+                <option value="hikes.html">Hikes</option>
+                <option value="add.html">Add more</option>
+                <option value="gallery.html">Gallery</option>
+            </select>
         </nav>
     </header>
     <!-- Main section with add new hike form -->
