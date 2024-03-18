@@ -1,71 +1,103 @@
-/* Reset default margin and padding for all elements */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <style>
+        /* Reset default margin and padding for all elements */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+        }
 
-/* Global styles */
-body {
-    font-family: 'Ysabeau SC', serif; /* Set default font family */
-    background-color: #f8f8f8; /* Set background color */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-}
+        /* Global styles */
+        body {
+            font-family: 'Ysabeau SC', serif; /* Set default font family */
+            background-color: #f8f8f8; /* Set background color */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
 
-.container {
-    max-width: 1200px; /* Set maximum width for the content container */
-    margin: 0 auto; /* Center content horizontally */
-    padding: 0 20px; /* Add padding to the sides */
-}
+        .container {
+            max-width: 1200px; /* Set maximum width for the content container */
+            margin: 0 auto; /* Center content horizontally */
+            padding: 0 20px; /* Add padding to the sides */
+        }
 
-/* Header styles */
-header {
-    background-color: #333; /* Background color for the header */
-    padding: 10px 0; /* Add padding to the top and bottom */
-}
+        /* Header styles */
+        header {
+            background-color: #333; /* Background color for the header */
+            padding: 10px 0; /* Add padding to the top and bottom */
+        }
 
-/* Navigation styles */
-nav {
-    background-color: #333; /* Background color for navigation */
-}
+        /* Navigation styles */
+        nav {
+            background-color: #333; /* Background color for navigation */
+        }
 
-nav ul {
-    list-style-type: none; /* Remove default list styling */
-    margin: 0;
-    padding: 0;
-}
+        nav ul {
+            list-style-type: none; /* Remove default list styling */
+            margin: 0;
+            padding: 0;
+        }
 
-nav ul li {
-    display: inline; /* Display list items horizontally */
-    margin-right: 20px; /* Add space between list items */
-}
+        nav ul li {
+            display: inline; /* Display list items horizontally */
+            margin-right: 20px; /* Add space between list items */
+        }
 
-nav ul li a {
-    color: #fff; /* Text color */
-    text-decoration: none; /* Remove underline from links */
-    padding: 10px; /* Add padding to links */
-}
+        nav ul li a {
+            color: #fff; /* Text color */
+            text-decoration: none; /* Remove underline from links */
+            padding: 10px; /* Add padding to links */
+        }
 
-nav ul li a:hover {
-    background-color: #555; /* Change background color on hover */
-}
+        nav ul li a:hover {
+            background-color: #555; /* Change background color on hover */
+        }
 
-/* Main content styles */
-main {
-    padding: 20px; /* Add padding to the main content */
-}
+        /* Main content styles */
+        main {
+            padding: 20px; /* Add padding to the main content */
+        }
 
-main img {
-    float: right; /* Float image to the right */
-    border-radius: 50%; /* Display image as a circle */
-}
+        main img {
+            float: right; /* Float image to the right */
+            border-radius: 50%; /* Display image as a circle */
+        }
 
-/* Footer styles */
-footer {
-    background-color: #333; /* Background color for the footer */
-    color: #fff; /* Text color */
-    text-align: center; /* Align text to the center */
-    padding: 10px 0; /* Add padding to the top and bottom */
-}
+        /* Footer styles */
+        footer {
+            background-color: #333; /* Background color for the footer */
+            color: #fff; /* Text color */
+            text-align: center; /* Align text to the center */
+            padding: 10px 0; /* Add padding to the top and bottom */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Header content goes here -->
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+        </ul>
+    </nav>
 
+    <div class="container">
+        <main>
+            <!-- Main content goes here -->
+        </main>
+    </div>
+
+    <footer>
+        <!-- Footer content goes here -->
+    </footer>
+</body>
+</html>
