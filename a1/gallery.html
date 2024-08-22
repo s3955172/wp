@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pets Victoria - Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Ysabeau+SC&display=swap" rel="stylesheet">
+    <script src="scripts.js" defer></script>
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html"><img src="logo.png" alt="Pets Victoria Logo"></a>
+            <form id="search-form">
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+            <select onchange="navigate(this.value)">
+                <option value="index.html">Home</option>
+                <option value="pets.html">Pets</option>
+                <option value="add.html">Add More</option>
+                <option value="gallery.html">Gallery</option>
+            </select>
+        </nav>
+    </header>
+    <main>
+        <h2>Pet Gallery</h2>
+        <div class="gallery">
+            <img src="cat1.jpg" alt="Cat 1">
+            <img src="cat2.jpg" alt="Cat 2">
+            <img src="cat3.jpg" alt="Cat 3">
+            <img src="cat4.jpg" alt="Cat 4">
+            <img src="catdog.jpg" alt="Cat and Dog">
+            <img src="dog1.jpg" alt="Dog 1">
+            <img src="dog2.jpg" alt="Dog 2">
+            <img src="dog3.jpg" alt="Dog 3">
+            <img src="dog4.jpg" alt="Dog 4">
+            <img src="pets.jpeg" alt="Group of Pets">
+            <img src="dogcat1.jpg" alt="Dog and Cat Together">
+            <img src="dogcat2.jpg" alt="Puppy and Kitten">
+            <img src="group_pets.jpg" alt="Group of Pets in Field">
+        </div>
+    </main>
+    <footer>
+        <p>&copy; Your Name</p>
+    </footer>
+</body>
+</html>
 
