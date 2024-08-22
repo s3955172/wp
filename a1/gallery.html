@@ -12,40 +12,59 @@
 <body>
     <header>
         <nav>
-            <a href="index.html"><img src="logo.png" alt="Pets Victoria Logo"></a>
-            <form id="search-form">
-                <input type="text" placeholder="Search...">
-                <button type="submit">Search</button>
-            </form>
+            <a href="index.html"><img src="logo.png" alt="Pets Victoria Logo" class="logo"></a>
             <select onchange="navigate(this.value)">
+                <option value="">Select an Option...</option>
                 <option value="index.html">Home</option>
                 <option value="pets.html">Pets</option>
                 <option value="add.html">Add More</option>
                 <option value="gallery.html">Gallery</option>
             </select>
+            <form id="search-form">
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
         </nav>
     </header>
     <main>
-        <h2>Pet Gallery</h2>
-        <div class="gallery">
-            <img src="cat1.jpg" alt="Cat 1">
-            <img src="cat2.jpg" alt="Cat 2">
-            <img src="cat3.jpg" alt="Cat 3">
-            <img src="cat4.jpg" alt="Cat 4">
-            <img src="catdog.jpg" alt="Cat and Dog">
-            <img src="dog1.jpg" alt="Dog 1">
-            <img src="dog2.jpg" alt="Dog 2">
-            <img src="dog3.jpg" alt="Dog 3">
-            <img src="dog4.jpg" alt="Dog 4">
-            <img src="pets.jpeg" alt="Group of Pets">
-            <img src="dogcat1.jpg" alt="Dog and Cat Together">
-            <img src="dogcat2.jpg" alt="Puppy and Kitten">
-            <img src="group_pets.jpg" alt="Group of Pets in Field">
+        <h2>Pets Victoria has a lot to offer!</h2>
+        <p>
+            For almost two decades, Pets Victoria has helped in creating true social change by bringing pet adoption into the mainstream.
+            Our work has helped make a difference to the Victorian rescue community and thousands of pets in need of rescue and rehabilitation.
+            But, until every pet is safe, respected, and loved, we all still have big, hairy work to do.
+        </p>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="cat1.jpg" alt="Milo">
+                <div class="gallery-caption">Milo</div>
+                <a href="#" class="overlay">
+                    <span>Discover more!</span>
+                </a>
+            </div>
+            <div class="gallery-item">
+                <img src="dog1.jpg" alt="Baxter">
+                <div class="gallery-caption">Baxter</div>
+            </div>
+            <div class="gallery-item">
+                <img src="cat2.jpg" alt="Luna">
+                <div class="gallery-caption">Luna</div>
+            </div>
+            <div class="gallery-item">
+                <img src="dog2.jpg" alt="Willow">
+                <div class="gallery-caption">Willow</div>
+            </div>
+            <div class="gallery-item">
+                <img src="cat3.jpg" alt="Oliver">
+                <div class="gallery-caption">Oliver</div>
+            </div>
+            <div class="gallery-item">
+                <img src="dog3.jpg" alt="Bella">
+                <div class="gallery-caption">Bella</div>
+            </div>
         </div>
     </main>
     <footer>
-        <p>&copy; Your Name</p>
+        <p>&copy; s3955172. All Rights Reserved | Designed for Pets Victoria</p>
     </footer>
 </body>
 </html>
-
