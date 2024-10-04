@@ -18,10 +18,23 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    background-color: #008080;
 }
 
-nav .logo {
-    height: 50px;
+nav select, nav input[type="search"] {
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+nav select {
+    padding-right: 30px;
+}
+
+nav input[type="search"] {
+    width: 180px;
 }
 
 h1.site-title {
@@ -46,18 +59,93 @@ p {
     margin: 20px 40px;
 }
 
-/* Gallery */
-.gallery-grid {
+/* Image Styling */
+main img {
+    border-radius: 50%;
+    max-width: 300px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    display: block;
+}
+
+/* Table Styling */
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 80%;
+    font-size: 18px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+table th {
+    background-color: #008080;
+    color: white;
+}
+
+/* Form Styling */
+form.pet-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"], form input[type="number"], form textarea, form select, form input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+form input[type="submit"], form button {
+    background-color: #008080;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+form button.clear-button {
+    background-color: transparent;
+    color: #008080;
+    border: 1px solid #008080;
+}
+
+form .form-actions {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #E57F3D;
+    color: #fff;
+    font-family: 'Ysabeau SC', sans-serif;
+    font-size: 14px;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
     padding: 20px;
 }
 
 .gallery-item {
     position: relative;
-    width: 30%;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -68,16 +156,12 @@ p {
 .gallery-item img {
     width: 100%;
     height: auto;
-    display: block;
     border-radius: 10px;
 }
 
 .gallery-caption {
     font-family: 'Poetsen One', sans-serif;
-    color: #36454F;
     background-color: #ffffff;
     padding: 10px 0;
     font-size: 18px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
 }
