@@ -1,34 +1,34 @@
 <?php 
-include('db_connect.inc');
-include('header.inc');
-include('nav.inc');
+include('includes/db_connect.inc');
+include('includes/header.inc');
+include('includes/nav.inc');
 
-$petid = $_GET['id'];
-$sql = "SELECT * FROM pets WHERE petid = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $petid);
-$stmt->execute();
-$result = $stmt->get_result();
-$pet = $result->fetch_assoc();
+if (isset($_GET['id'])) {
+    $petid = $_GET['id'];
 
-if ($pet):
+    $stmt = $pdo->prepare("SELECT * FROM pets WHERE petid = :petid");
+    $stmt->execute(['petid' => $petid]);
+    $pet = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($pet) {
+        ?>
+        <main>
+            <h2><?php echo htmlspecialchars($pet['petname']); ?></h2>
+            <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" alt="<?php echo htmlspecialchars($pet['caption']); ?>">
+            <p><?php echo htmlspecialchars($pet['description']); ?></p>
+            <ul>
+                <li>Age: <?php echo htmlspecialchars($pet['age']); ?> months</li>
+                <li>Type: <?php echo htmlspecialchars($pet['type']); ?></li>
+                <li>Location: <?php echo htmlspecialchars($pet['location']); ?></li>
+            </ul>
+        </main>
+        <?php
+    } else {
+        echo "<main><h2>Pet not found.</h2></main>";
+    }
+} else {
+    echo "<main><h2>No pet selected.</h2></main>";
+}
+
+include('includes/footer.inc');
 ?>
-
-<main>
-    <h2><?php echo $pet['petname']; ?></h2>
-    <img src="images/<?php echo $pet['image']; ?>" alt="<?php echo $pet['caption']; ?>">
-    <p><?php echo $pet['description']; ?></p>
-    <ul>
-        <li>Age: <?php echo $pet['age']; ?> months</li>
-        <li>Type: <?php echo $pet['type']; ?></li>
-        <li>Location: <?php echo $pet['location']; ?></li>
-    </ul>
-</main>
-
-<?php else: ?>
-    <main>
-        <h2>Pet not found.</h2>
-    </main>
-<?php endif; ?>
-
-<?php include('footer.inc'); ?>
