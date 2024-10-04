@@ -3,6 +3,7 @@
 This repository contains the code for the Pets Victoria website.
 
 [Visit the site here](http://titan.csit.rmit.edu.au/~s3955172/wp/)
+Loading 50% I not sure what's causing the issue. It was working fine on my laptop, but I'm experiencing problems on my PC. There's an error, but I haven't been able to pinpoint where it's coming from.
 
 ## Structure
 
