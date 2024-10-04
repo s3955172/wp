@@ -3,7 +3,7 @@
 <main>
     <h2>Add a New Pet</h2>
     <form action="process_add.php" method="POST" enctype="multipart/form-data">
-        <label for="name">Name:</label>
+        <label for="name">Pet Name:</label>
         <input type="text" id="name" name="name" required><br>
 
         <label for="type">Type:</label>
@@ -22,7 +22,7 @@
         <label for="location">Location:</label>
         <input type="text" id="location" name="location" required><br>
 
-        <label for="image">Image:</label>
+        <label for="image">Upload Image:</label>
         <input type="file" id="image" name="image" required><br>
 
         <button type="submit">Submit</button>
