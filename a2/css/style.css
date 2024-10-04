@@ -1,0 +1,47 @@
+body {
+    margin: 0 auto;
+    max-width: 1200px;
+    font-family: 'Ysabeau SC', sans-serif;
+    background-color: #fcf9ec;
+    color: #36454F;
+}
+
+header, footer {
+    background-color: #008080;
+    color: #fcf9ec;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.gallery-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
