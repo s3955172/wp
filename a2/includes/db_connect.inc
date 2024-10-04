@@ -1,14 +1,14 @@
 <?php
-$host = 'talsprddb02.int.its.rmit.edu.au';
-$dbname = 's3955172';
-$username = 's3955172';
-$password = 'Dobryak2003';
-$port = 3306;
+$servername = "localhost";
+$username = "your_username";  // Your MySQL username
+$password = "your_password";  // Your MySQL password
+$dbname = "petsvictoria";
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;port=$port", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
