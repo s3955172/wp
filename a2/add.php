@@ -1,7 +1,7 @@
 <?php 
-include('db_connect.inc');
-include('header.inc');
-include('nav.inc');
+include('includes/db_connect.inc');
+include('includes/header.inc');
+include('includes/nav.inc');
 ?>
 
 <main>
@@ -42,4 +42,4 @@ include('nav.inc');
     </form>
 </main>
 
-<?php include('footer.inc'); ?>
+<?php include('includes/footer.inc'); ?>
