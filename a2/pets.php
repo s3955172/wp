@@ -1,7 +1,7 @@
 <?php 
-include('db_connect.inc');
-include('header.inc');
-include('nav.inc');
+include('includes/db_connect.inc');
+include('includes/header.inc');
+include('includes/nav.inc');
 ?>
 
 <main>
@@ -17,24 +17,18 @@ include('nav.inc');
         </thead>
         <tbody>
         <?php
-        $sql = "SELECT petid, petname, type, age, location FROM pets";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td><a href='details.php?id=" . $row['petid'] . "'>" . $row['petname'] . "</a></td>";
-                echo "<td>" . $row['type'] . "</td>";
-                echo "<td>" . $row['age'] . "</td>";
-                echo "<td>" . $row['location'] . "</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='4'>No pets available</td></tr>";
+        $stmt = $pdo->query("SELECT petid, petname, type, age, location FROM pets");
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            echo "<tr>";
+            echo "<td><a href='details.php?id=" . $row['petid'] . "'>" . htmlspecialchars($row['petname']) . "</a></td>";
+            echo "<td>" . htmlspecialchars($row['type']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['age']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['location']) . "</td>";
+            echo "</tr>";
         }
         ?>
         </tbody>
     </table>
 </main>
 
-<?php include('footer.inc'); ?>
+<?php include('includes/footer.inc'); ?>
