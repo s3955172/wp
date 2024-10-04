@@ -36,7 +36,7 @@ include('includes/db_connect.inc');
             <h2>Welcome to Pet Adoption</h2>
         </div>
         
-        <!-- Centered Image -->
+        <!-- Ensure the image file is in the /images/ directory -->
         <img src="images/image.png" alt="Adopt a Pet" class="main-image">
     </main>
     <footer>
