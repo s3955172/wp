@@ -30,11 +30,14 @@ include('includes/db_connect.inc');
             </form>
         </nav>
     </header>
-    <main>
-        <h1 class="site-title">Pets Victoria</h1>
-        <h2>Welcome to Pet Adoption</h2>
-        <img src="images/main.jpg" alt="Adopt a Pet" class="main-image">
-        <p>Explore the pets we have available for adoption and learn how you can bring a new member to your family.</p>
+    <main class="home-content">
+        <div class="text-content">
+            <h1 class="site-title">Pets Victoria</h1>
+            <h2>Welcome to Pet Adoption</h2>
+        </div>
+        
+        <!-- Centered Image -->
+        <img src="images/image.png" alt="Adopt a Pet" class="main-image">
     </main>
     <footer>
         <p>&copy; s3955172. All Rights Reserved | Designed for Pets Victoria</p>
