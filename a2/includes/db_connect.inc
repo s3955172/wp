@@ -2,7 +2,7 @@
 $host = 'talsprddb02.int.its.rmit.edu.au';  // Database host
 $dbname = 's3955172';  // Database name
 $username = 's3955172';  // Username
-$password = 'Dobryak2003';  // Ppassword
+$password = 'Dobryak2003';  // Password
 $port = 3306;  // Database port
 
 try {
