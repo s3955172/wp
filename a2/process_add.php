@@ -1,25 +1,28 @@
-<?php
-include('includes/db_connect.inc');
+<?php 
+include('db_connect.inc');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $type = $_POST['type'];
-    $description = $_POST['description'];
-    $age = $_POST['age'];
-    $location = $_POST['location'];
+$petname = $_POST['petname'];
+$description = $_POST['description'];
+$caption = $_POST['caption'];
+$age = $_POST['age'];
+$type = $_POST['type'];
+$location = $_POST['location'];
 
-    // Handle file upload
-    $image = $_FILES['image']['name'];
-    $target_dir = "images/";
-    $target_file = $target_dir . basename($image);
+$image = $_FILES['image']['name'];
+$target = "images/" . basename($image);
 
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-        // Insert the pet data into the database
-        $stmt = $pdo->prepare("INSERT INTO pets (petname, type, description, age, location, image) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$name, $type, $description, $age, $location, $image]);
-        header('Location: pets.php');
+if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+    $sql = "INSERT INTO pets (petname, description, caption, age, type, location, image) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssdsis", $petname, $description, $caption, $age, $type, $location, $image);
+    
+    if ($stmt->execute()) {
+        echo "Pet added successfully.";
     } else {
-        echo "Error uploading image.";
+        echo "Error: " . $stmt->error;
     }
+} else {
+    echo "Failed to upload image.";
 }
 ?>
