@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $target_file = $target_dir . basename($image);
 
     if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
+        // Insert the pet data into the database
         $stmt = $pdo->prepare("INSERT INTO pets (petname, type, description, age, location, image) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([$name, $type, $description, $age, $location, $image]);
         header('Location: pets.php');
