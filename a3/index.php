@@ -1,7 +1,7 @@
-<?php
+<?php 
 include('includes/db_connect.inc');
-include('includes/header.inc');
-include('includes/nav.inc');
+include('includes/header.inc'); // Includes head section and opening body tag
+include('includes/nav.inc');     // Includes the <nav> section
 ?>
 
 <main>
@@ -14,4 +14,4 @@ include('includes/nav.inc');
     <p>Explore the pets we have available for adoption and learn how you can bring a new member to your family.</p>
 </main>
 
-<?php include('includes/footer.inc'); ?>
+<?php include('includes/footer.inc'); ?> <!-- Closing with the footer and </body></html> tags -->
