@@ -12,7 +12,7 @@ Pets Victoria is a fictional pet adoption agency website built as part of a web 
 - **Secure Input Handling**: Prepared statements and password encryption for secure user data management.
 
 ## Deployment
-The website is deployed on the Jupiter web server. http://titan.csit.rmit.edu.au/~s3955172/wp/
+The website is deployed on the Jupiter web server. [http://titan.csit.rmit.edu.au/~s3955172/wp/](https://titan.csit.rmit.edu.au/~s3955172/wp/a3/)
 
 - **Link to Deployment**: 
 
