@@ -3,10 +3,8 @@ include('includes/header.inc');
 include('includes/nav.inc');
 ?>
 
-<main class="container">
-    <h1>Welcome to Pets Victoria</h1>
-    
-    <!-- Carousel for last four images -->
+<main class="container-fluid">
+    <h1 class="text-center">Welcome to Pets Victoria</h1>
     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <?php
@@ -15,7 +13,7 @@ include('includes/nav.inc');
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $active = $first ? 'active' : '';
                 echo "<div class='carousel-item $active'>";
-                echo "<img src='images/" . htmlspecialchars($row['image']) . "' class='d-block w-100' alt='Pet Image'>";
+                echo "<img src='images/" . htmlspecialchars($row['image']) . "' class='d-block w-100' alt='Pet Image' style='max-height: 500px;'>";
                 echo "</div>";
                 $first = false;
             }
