@@ -1,17 +1,35 @@
 <?php 
-include('includes/db_connect.inc');
-include('includes/header.inc'); // Includes head section and opening body tag
-include('includes/nav.inc');     // Includes the <nav> section
+include('includes/header.inc');
+include('includes/nav.inc');
 ?>
 
-<main>
-    <h1 class="site-title">Pets Victoria</h1>
-    <h2>Welcome to Pet Adoption</h2>
+<main class="container">
+    <h1>Welcome to Pets Victoria</h1>
     
-    <!-- Centered Image -->
-    <img src="images/main.jpg" alt="Adopt a Pet" class="main-image">
-
-    <p>Explore the pets we have available for adoption and learn how you can bring a new member to your family.</p>
+    <!-- Carousel for last four images -->
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <?php
+            $stmt = $pdo->query("SELECT image FROM pets ORDER BY petid DESC LIMIT 4");
+            $first = true;
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $active = $first ? 'active' : '';
+                echo "<div class='carousel-item $active'>";
+                echo "<img src='images/" . htmlspecialchars($row['image']) . "' class='d-block w-100' alt='Pet Image'>";
+                echo "</div>";
+                $first = false;
+            }
+            ?>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 </main>
 
-<?php include('includes/footer.inc'); ?> <!-- Closing with the footer and </body></html> tags -->
+<?php include('includes/footer.inc'); ?>
