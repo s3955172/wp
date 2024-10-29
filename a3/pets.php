@@ -1,34 +1,34 @@
-<?php
+<?php 
 include('includes/db_connect.inc');
 include('includes/header.inc');
 include('includes/nav.inc');
 ?>
 
 <main>
-    <h2>Pets Victoria Gallery</h2>
-    <p>Explore the pets we have available for adoption.</p>
-    
-    <div class="gallery-grid">
+    <h2>Available Pets</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Pet</th>
+                <th>Type</th>
+                <th>Age (months)</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
         <?php
-        // Fetch all pets with their images
-        $stmt = $pdo->query("SELECT petid, petname, image, caption FROM pets");
-        
-        // Display each pet's image in the gallery
+        $stmt = $pdo->query("SELECT petid, petname, type, age, location FROM pets");
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $imagePath = 'images/' . htmlspecialchars($row['image']);
-            $petName = htmlspecialchars($row['petname']);
-            $caption = htmlspecialchars($row['caption']);
-            $petID = $row['petid'];
-
-            echo "<div class='gallery-item'>";
-            echo "<a href='details.php?id=" . urlencode($petID) . "'>";
-            echo "<img src='$imagePath' alt='$caption'>";
-            echo "<div class='gallery-caption'>$petName</div>";
-            echo "</a>";
-            echo "</div>";
+            echo "<tr>";
+            echo "<td><a href='details.php?id=" . urlencode($row['petid']) . "'>" . htmlspecialchars($row['petname']) . "</a></td>";
+            echo "<td>" . htmlspecialchars($row['type']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['age']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['location']) . "</td>";
+            echo "</tr>";
         }
         ?>
-    </div>
+        </tbody>
+    </table>
 </main>
 
 <?php include('includes/footer.inc'); ?>
