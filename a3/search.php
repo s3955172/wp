@@ -2,11 +2,9 @@
 include('includes/header.inc');
 include('includes/nav.inc');
 
-// Get search parameters from query
 $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
 $type = isset($_GET['type']) ? trim($_GET['type']) : '';
 
-// Construct the SQL query based on provided search criteria
 $query = "SELECT petid, petname, type, location, image, caption FROM pets WHERE 1=1";
 $params = [];
 
@@ -25,38 +23,34 @@ $stmt->execute($params);
 $pets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<main class="container">
-    <h2>Search for Pets</h2>
+<main class="container-fluid">
+    <h2 class="text-center">Search for Pets</h2>
     
-    <!-- Search Form -->
-    <form action="search.php" method="get" class="mb-4">
-        <div class="row">
-            <div class="col-md-6">
-                <input type="text" name="keyword" class="form-control" placeholder="Search by name or description" value="<?php echo htmlspecialchars($keyword); ?>">
-            </div>
-            <div class="col-md-4">
-                <select name="type" class="form-select">
-                    <option value="">All Types</option>
-                    <?php
-                    // Fetch distinct pet types for dropdown
-                    $types = $pdo->query("SELECT DISTINCT type FROM pets");
-                    while ($row = $types->fetch(PDO::FETCH_ASSOC)) {
-                        $selected = ($type === $row['type']) ? 'selected' : '';
-                        echo "<option value='" . htmlspecialchars($row['type']) . "' $selected>" . htmlspecialchars($row['type']) . "</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary w-100">Search</button>
-            </div>
+    <form action="search.php" method="get" class="row mb-4">
+        <div class="col-md-6">
+            <input type="text" name="keyword" class="form-control" placeholder="Search by name or description" value="<?php echo htmlspecialchars($keyword); ?>">
+        </div>
+        <div class="col-md-4">
+            <select name="type" class="form-select">
+                <option value="">All Types</option>
+                <?php
+                $types = $pdo->query("SELECT DISTINCT type FROM pets");
+                while ($row = $types->fetch(PDO::FETCH_ASSOC)) {
+                    $selected = ($type === $row['type']) ? 'selected' : '';
+                    echo "<option value='" . htmlspecialchars($row['type']) . "' $selected>" . htmlspecialchars($row['type']) . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
         </div>
     </form>
 
     <?php if (!empty($pets)): ?>
         <div class="row">
             <?php foreach ($pets as $pet): ?>
-                <div class="col-md-4 mb-4">
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card">
                         <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($pet['caption']); ?>">
                         <div class="card-body">
