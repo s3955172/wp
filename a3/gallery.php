@@ -10,22 +10,17 @@ include('includes/nav.inc');
     
     <div class="gallery-grid">
         <?php
-        // Fetch all pets with their images
         $stmt = $pdo->query("SELECT petid, petname, image, caption FROM pets");
-        
-        // Display each pet's image in the gallery
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $imagePath = 'images/' . htmlspecialchars($row['image']);
-            $petName = htmlspecialchars($row['petname']);
-            $caption = htmlspecialchars($row['caption']);
             $petID = $row['petid'];
 
-            echo "<div class='gallery-item'>";
-            echo "<a href='details.php?id=$petID'>";
-            echo "<img src='$imagePath' alt='$caption'>";
-            echo "<div class='gallery-caption'>$petName</div>";
-            echo "</a>";
-            echo "</div>";
+            echo "<div class='gallery-item'>
+                    <a href='details.php?id=" . urlencode($petID) . "'>
+                        <img src='$imagePath' alt='" . htmlspecialchars($row['caption']) . "'>
+                        <div class='gallery-caption'>" . htmlspecialchars($row['petname']) . "</div>
+                    </a>
+                  </div>";
         }
         ?>
     </div>
