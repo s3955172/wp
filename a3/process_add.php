@@ -16,10 +16,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $target_file = $target_dir . basename($image);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-        // Check if file is an actual image
+        // Allowed file types
+        $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
+
+        // Check if file is an actual image and has an allowed file type
         $check = getimagesize($_FILES['image']['tmp_name']);
-        if ($check !== false) {
+        if ($check !== false && in_array($imageFileType, $allowed_types)) {
+            // Rename file if it already exists
+            if (file_exists($target_file)) {
+                $image = time() . '_' . $image; // Prefix with a timestamp
+                $target_file = $target_dir . $image;
+            }
+            
+            // Move file to the target directory
             if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
+                // Insert data into the database
                 try {
                     $stmt = $pdo->prepare("INSERT INTO pets (petname, description, caption, age, type, location, image)
                                            VALUES (:petname, :description, :caption, :age, :type, :location, :image)");
@@ -41,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo "Sorry, there was an error uploading your file.";
             }
         } else {
-            echo "File is not an image.";
+            echo "File is not a supported image type.";
         }
     } else {
         echo "No file was uploaded or there was an upload error.";
