@@ -3,12 +3,11 @@ include('includes/header.inc');
 include('includes/nav.inc');
 ?>
 
-<main class="container">
+<main class="container-fluid">
     <h2>Pet Gallery</h2>
     <p>Select a type to filter the pets:</p>
     
-    <!-- Dropdown for pet type filtering -->
-    <select id="type-filter" class="form-select" onchange="filterPetsByType()">
+    <select id="type-filter" class="form-select mb-4" onchange="filterPetsByType()">
         <option value="">All Types</option>
         <?php
         $types = $pdo->query("SELECT DISTINCT type FROM pets");
@@ -18,7 +17,7 @@ include('includes/nav.inc');
         ?>
     </select>
 
-    <div class="gallery-grid mt-4">
+    <div class="row">
         <?php
         $typeFilter = isset($_GET['type']) ? $_GET['type'] : '';
         $query = "SELECT petid, petname, image, caption FROM pets";
@@ -31,10 +30,10 @@ include('includes/nav.inc');
         }
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            echo "<div class='gallery-item'>
+            echo "<div class='col-lg-4 col-md-6 mb-4'>
                     <a href='details.php?id=" . urlencode($row['petid']) . "'>
                         <img src='images/" . htmlspecialchars($row['image']) . "' alt='" . htmlspecialchars($row['caption']) . "' class='img-thumbnail'>
-                        <div class='gallery-caption'>" . htmlspecialchars($row['petname']) . "</div>
+                        <h5 class='text-center mt-2'>" . htmlspecialchars($row['petname']) . "</h5>
                     </a>
                   </div>";
         }
