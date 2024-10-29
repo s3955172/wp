@@ -20,7 +20,7 @@ include('includes/nav.inc');
         $stmt = $pdo->query("SELECT petid, petname, type, age, location FROM pets");
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>";
-            echo "<td><a href='details.php?id=" . $row['petid'] . "'>" . htmlspecialchars($row['petname']) . "</a></td>";
+            echo "<td><a href='details.php?id=" . urlencode($row['petid']) . "'>" . htmlspecialchars($row['petname']) . "</a></td>";
             echo "<td>" . htmlspecialchars($row['type']) . "</td>";
             echo "<td>" . htmlspecialchars($row['age']) . "</td>";
             echo "<td>" . htmlspecialchars($row['location']) . "</td>";
