@@ -2,6 +2,7 @@
 include('includes/header.inc');
 include('includes/nav.inc');
 
+// Fetch the pet details based on the provided pet ID
 if (isset($_GET['id'])) {
     $petid = $_GET['id'];
     $stmt = $pdo->prepare("SELECT * FROM pets WHERE petid = :petid");
@@ -29,8 +30,13 @@ if (isset($_GET['id'])) {
             </ul>
             
             <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $pet['user_id']): ?>
+                <!-- Edit Button -->
                 <a href="edit.php?id=<?php echo htmlspecialchars($pet['petid']); ?>" class="btn btn-primary mt-3">Edit</a>
-                <a href="delete.php?id=<?php echo htmlspecialchars($pet['petid']); ?>" class="btn btn-danger mt-3">Delete</a>
+                
+                <!-- Delete Button with JavaScript Confirmation -->
+                <a href="delete.php?id=<?php echo htmlspecialchars($pet['petid']); ?>" 
+                   onclick="return confirm('Are you sure you want to delete this pet? This action cannot be undone.');" 
+                   class="btn btn-danger mt-3">Delete</a>
             <?php endif; ?>
         </div>
     </div>
