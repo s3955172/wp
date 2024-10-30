@@ -1,17 +1,24 @@
 <?php
-$host = 'talsprddb02.int.its.rmit.edu.au';  // Database host
-$dbname = 's3955172';  // Database name
-$username = 's3955172';  // Username
-$password = 'Dobryak2003';  // Password
-$port = 3306;  // Database port
+// db_connect.inc
 
-try {
-    // Establish connection using PDO
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;port=$port", $username, $password);
-    // Set error mode to exception to handle errors properly
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    // Handle connection failure
-    die("Connection failed: " . $e->getMessage());
+// Check what server you are accessing
+if (strstr($_SERVER['SERVER_NAME'], 'localhost')) {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "WP";
+} else {
+    $servername = "talsprddb02.int.its.rmit.edu.au";
+    $username = "s3955172"; // Replace with your actual RMIT username
+    $password = "Dobryak2003"; // Replace with your actual Jacob5 password
+    $dbname = "s3955172"; // Replace with the actual database name if different
+}
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
