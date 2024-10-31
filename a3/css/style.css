@@ -93,14 +93,14 @@ body {
     }
 }
 
-/* Search UI Styling */
+/* Full-Width Search UI Styling */
 .search-container {
-    width: 100%;
-    max-width: 1000px; /* Matches carousel width */
+    width: 100%; /* Full-width search bar */
+    padding: 0 20px;
+    max-width: 100%; /* Ensure it spans the full width */
     display: flex;
     gap: 10px;
-    justify-content: center;
-    margin: 0 auto 20px auto;
+    margin: 20px auto;
 }
 
 .search-container input[type="text"],
