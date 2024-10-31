@@ -3,13 +3,18 @@ session_start();
 include 'includes/db_connect.inc';
 include 'includes/header.inc';
 
-if (!isset($_SESSION['username'])) {
+// Determine which user's pets to display
+if (isset($_GET['username'])) {
+    $username = htmlspecialchars($_GET['username']);
+} elseif (isset($_SESSION['username'])) {
+    $username = htmlspecialchars($_SESSION['username']);
+} else {
     echo "<p>You must be logged in to view this page.</p>";
     include 'includes/footer.inc';
     exit;
 }
 
-$username = htmlspecialchars($_SESSION['username']);
+// Fetch pets uploaded by the specified user
 $stmt = $conn->prepare("SELECT * FROM pets WHERE username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
@@ -18,7 +23,9 @@ $stmt->close();
 ?>
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Your Uploaded Pets</h2>
+    <h2 class="text-center mb-4">
+        <?php echo htmlspecialchars($username); ?>'s Uploaded Pets
+    </h2>
     <div class="row">
         <?php if (count($userPets) > 0): ?>
             <?php foreach ($userPets as $pet): ?>
@@ -33,15 +40,17 @@ $stmt->close();
                             <p class="card-text"><strong>Age:</strong> <?php echo htmlspecialchars($pet['age']); ?> months</p>
                             <p class="card-text"><strong>Location:</strong> <?php echo htmlspecialchars($pet['location']); ?></p>
                         </div>
-                        <div class="card-footer text-center">
-                            <a href="edit.php?id=<?php echo $pet['petid']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="delete.php?id=<?php echo $pet['petid']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this pet?')">Delete</a>
-                        </div>
+                        <?php if (isset($_SESSION['username']) && $_SESSION['username'] === $username): ?>
+                            <div class="card-footer text-center">
+                                <a href="edit.php?id=<?php echo $pet['petid']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="delete.php?id=<?php echo $pet['petid']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this pet?')">Delete</a>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p class="text-center">You haven't uploaded any pets yet.</p>
+            <p class="text-center">This user hasn't uploaded any pets yet.</p>
         <?php endif; ?>
     </div>
 </div>
