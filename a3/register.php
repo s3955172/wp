@@ -5,15 +5,13 @@ include 'includes/header.inc';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = htmlspecialchars($_POST['username']);
-    $password = hash('sha1', $_POST['password']); // Hash the password with SHA-1
+    $password = hash('sha1', $_POST['password']); // SHA-1 hash for compatibility
 
-    // Prepare SQL to insert username and hashed password
     $stmt = $conn->prepare("INSERT INTO users (username, password, reg_date) VALUES (?, ?, NOW())");
     $stmt->bind_param("ss", $username, $password);
-    
+
     if ($stmt->execute()) {
-        $_SESSION['username'] = $username;
-        header("Location: index.php"); // Redirect to the homepage after successful registration
+        header("Location: login.php"); // Redirect to login page after successful registration
         exit;
     } else {
         $error = "Registration failed. Please try again.";
