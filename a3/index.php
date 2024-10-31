@@ -59,7 +59,7 @@ $result = $conn->query("SELECT image FROM pets ORDER BY petid DESC LIMIT 4");
     <!-- Discover Section -->
     <div class="discover-section">
         <h2>Discover Pets Victoria</h2>
-        <p>Explore a range of pets waiting for a new home and find resources to help you choose your perfect companion.</p>
+        <p>Pets Victoria is a dedicated pet adoption organisation based in Victoria, Australia, focused on providing a safe and loving environment for pets in need. With a compassionate approach, Pets Victoria works tirelessly to rescue, rehabilitate, and rehome dogs, cats, and other animals. Their mission is to connect these deserving pets with caring individuals and families, creating lifelong bonds. The organisation offers a range of services, including adoption counseling, pet education, and community support programs, all aimed at promoting responsible pet ownership and reducing the number of homeless animals.</p>
     </div>
 </div>
 
