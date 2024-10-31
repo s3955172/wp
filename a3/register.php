@@ -16,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: index.php"); // Redirect to the homepage after successful registration
         exit;
     } else {
-        $error = "Registration failed. Please try again.";
+        // Output a detailed error message for debugging
+        $error = "Registration failed: " . $stmt->error;
     }
     $stmt->close();
 }
