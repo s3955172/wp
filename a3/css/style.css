@@ -247,3 +247,26 @@ h2 {
 .error-message {
     background-color: #f44336;
 }
+.card {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    border-bottom: 1px solid #ddd;
+}
+
+.card-title {
+    font-weight: bold;
+    color: #008080;
+}
+
+.card-text {
+    color: #555;
+}
