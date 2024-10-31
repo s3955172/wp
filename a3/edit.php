@@ -12,7 +12,10 @@ if (isset($_GET['id'])) {
     $pet_id = (int)$_GET['id'];
     
     // Fetch pet data
-    $stmt = $conn->prepare("SELECT * FROM pets WHERE id = ?");
+    $stmt = $conn->prepare("SELECT * FROM pets WHERE petid = ?");
+    if (!$stmt) {
+        die("Preparation failed: " . $conn->error);
+    }
     $stmt->bind_param("i", $pet_id);
     $stmt->execute();
     $pet = $stmt->get_result()->fetch_assoc();
@@ -46,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($pet)) {
 
         if (move_uploaded_file($_FILES["pet_image"]["tmp_name"], $target_file)) {
             // Delete old image
-            if (file_exists($target_dir . $pet['image'])) {
+            if (file_exists($target_dir . $pet['image']) && $pet['image'] != $file_name) {
                 unlink($target_dir . $pet['image']);
             }
             $updated_image = $file_name;
@@ -56,7 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($pet)) {
     }
 
     // Update pet data
-    $stmt = $conn->prepare("UPDATE pets SET name = ?, type = ?, description = ?, age = ?, location = ?, image = ? WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE pets SET petname = ?, type = ?, description = ?, age = ?, location = ?, image = ? WHERE petid = ?");
+    if (!$stmt) {
+        die("Preparation failed: " . $conn->error);
+    }
     $stmt->bind_param("sssissi", $pet_name, $type, $description, $age, $location, $updated_image, $pet_id);
 
     if ($stmt->execute()) {
@@ -84,7 +90,7 @@ $conn->close();
         <h2>Edit Pet Details</h2>
         <form action="edit.php?id=<?php echo $pet_id; ?>" method="post" enctype="multipart/form-data">
             <label for="pet_name">Pet Name:</label>
-            <input type="text" name="pet_name" id="pet_name" value="<?php echo htmlspecialchars($pet['name']); ?>" required>
+            <input type="text" name="pet_name" id="pet_name" value="<?php echo htmlspecialchars($pet['petname']); ?>" required>
 
             <label for="type">Type:</label>
             <input type="text" name="type" id="type" value="<?php echo htmlspecialchars($pet['type']); ?>" required>
