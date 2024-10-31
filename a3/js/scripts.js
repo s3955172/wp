@@ -6,3 +6,7 @@ function navigate(url) {
         console.error("No URL provided for navigation."); // Logs an error if URL is empty
     }
 }
+
+function confirmDeletion() {
+    return confirm("Are you sure you want to delete this item?");
+}
