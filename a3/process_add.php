@@ -1,63 +1,43 @@
-<?php 
-include('includes/db_connect.inc');
+<?php
+session_start();
+include 'db_connect.inc';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $petname = $_POST['petname'];
-    $description = $_POST['description'];
-    $caption = $_POST['caption'];
-    $age = $_POST['age'];
-    $type = $_POST['type'];
-    $location = $_POST['location'];
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
 
-    // Handle the file upload
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $image = $_FILES['image']['name'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $pet_name = htmlspecialchars($_POST['pet_name']);
+    $type = htmlspecialchars($_POST['type']);
+    $description = htmlspecialchars($_POST['description']);
+    $age = (int)$_POST['age'];
+    $location = htmlspecialchars($_POST['location']);
+    $username = $_SESSION['username'];
+
+    if (isset($_FILES['pet_image']) && $_FILES['pet_image']['error'] == 0) {
         $target_dir = "images/";
-        $target_file = $target_dir . basename($image);
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-        // Allowed file types
-        $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
-
-        // Check if file is an actual image and has an allowed file type
-        $check = getimagesize($_FILES['image']['tmp_name']);
-        if ($check !== false && in_array($imageFileType, $allowed_types)) {
-            // Rename file if it already exists
-            if (file_exists($target_file)) {
-                $image = time() . '_' . $image; // Prefix with a timestamp
-                $target_file = $target_dir . $image;
+        $file_name = basename($_FILES["pet_image"]["name"]);
+        $target_file = $target_dir . uniqid() . "_" . $file_name;
+        
+        if (move_uploaded_file($_FILES["pet_image"]["tmp_name"], $target_file)) {
+            $stmt = $conn->prepare("INSERT INTO pets (name, type, description, age, location, image, username) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssiss", $pet_name, $type, $description, $age, $location, $target_file, $username);
+            
+            if ($stmt->execute()) {
+                header("Location: gallery.php");
+            } else {
+                echo "Error: " . $stmt->error;
             }
             
-            // Move file to the target directory
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-                // Insert data into the database
-                try {
-                    $stmt = $pdo->prepare("INSERT INTO pets (petname, description, caption, age, type, location, image)
-                                           VALUES (:petname, :description, :caption, :age, :type, :location, :image)");
-                    $stmt->execute([
-                        'petname' => $petname,
-                        'description' => $description,
-                        'caption' => $caption,
-                        'age' => $age,
-                        'type' => $type,
-                        'location' => $location,
-                        'image' => $image,
-                    ]);
-
-                    echo "New pet added successfully.";
-                } catch (PDOException $e) {
-                    echo "Error: " . $e->getMessage();
-                }
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
+            $stmt->close();
         } else {
-            echo "File is not a supported image type.";
+            echo "Failed to upload image.";
         }
     } else {
-        echo "No file was uploaded or there was an upload error.";
+        echo "No image uploaded or upload error.";
     }
-} else {
-    echo "Invalid request.";
 }
+
+$conn->close();
 ?>
