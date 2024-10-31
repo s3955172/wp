@@ -26,7 +26,8 @@ body {
 }
 
 .main-nav .logo {
-    height: 50px;
+    width: 50px;  /* Fixed width */
+    height: 50px; /* Fixed height */
     margin-right: 15px;
 }
 
