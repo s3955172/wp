@@ -31,4 +31,4 @@ $stmt->close();
     </div>
 </div>
 
-<?php include 'footer.inc'; ?>
+<?php include 'includes/footer.inc'; ?>
