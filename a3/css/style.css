@@ -5,31 +5,22 @@ body {
     color: #333;
 }
 
+/* Container Styling */
 .container.homepage {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    max-width: 100%;
 }
 
 /* Header with Logo */
-.main-header {
+.main-header, .main-nav {
     display: flex;
     align-items: center;
     background-color: #fcf9ec;
     padding: 10px 20px;
-}
-
-.main-header .logo {
-    height: 50px;
-    margin-right: 15px;
-}
-
-.main-nav {
-    display: flex;
-    align-items: center;
-    background-color: #fcf9ec;
-    padding: 10px 20px;
+    flex-wrap: wrap;
 }
 
 .main-nav .logo {
@@ -42,6 +33,7 @@ body {
     text-decoration: none;
     color: #333;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .main-nav a:hover {
@@ -51,15 +43,16 @@ body {
 /* Carousel and Title Layout */
 .carousel-and-title {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     max-width: 1000px;
     margin-bottom: 20px;
+    gap: 20px;
 }
 
 .carousel-container {
     flex: 1;
-    max-width: 300px;
-    margin-right: 20px;
+    min-width: 300px;
 }
 
 .welcome-text {
@@ -77,6 +70,16 @@ body {
     color: #ffcb7d;
 }
 
+/* Responsive Text Sizing */
+@media (max-width: 768px) {
+    .welcome-text h1 {
+        font-size: 28px;
+    }
+    .welcome-text h3 {
+        font-size: 20px;
+    }
+}
+
 /* Search UI Styling */
 .search-container {
     width: 100%;
@@ -85,6 +88,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .search-container input[type="text"],
@@ -92,7 +96,7 @@ body {
 .search-container button {
     padding: 10px;
     font-size: 16px;
-    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .search-container button {
@@ -126,8 +130,10 @@ body {
     justify-content: center;
 }
 
+/* Responsive Gallery Cards */
 .pet-item {
-    width: 200px;
+    width: 100%;
+    max-width: 250px;
     text-align: center;
     border: 2px solid #ddd;
     border-radius: 10px;
@@ -142,14 +148,9 @@ body {
     transform: scale(1.05);
 }
 
-/* Link styling within pet item */
 .pet-item a {
     text-decoration: none;
     color: inherit;
-}
-
-.pet-item a:hover .pet-name {
-    text-decoration: underline;
 }
 
 .pet-image {
@@ -176,21 +177,7 @@ footer {
     margin-top: 20px;
 }
 
-.container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background-color: #fcf9ec;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-h2 {
-    text-align: center;
-    color: #008080;
-}
-
+/* Form and Button Styling */
 .add-pet-form {
     display: flex;
     flex-direction: column;
@@ -213,10 +200,6 @@ h2 {
     font-size: 16px;
 }
 
-.add-pet-form textarea {
-    resize: vertical;
-}
-
 .add-pet-form button {
     background-color: #008080;
     color: #fff;
@@ -232,6 +215,7 @@ h2 {
     background-color: #006666;
 }
 
+/* Success and Error Messages */
 .success-message, .error-message {
     text-align: center;
     padding: 10px;
@@ -248,6 +232,7 @@ h2 {
     background-color: #f44336;
 }
 
+/* Card Styling */
 .card {
     border-radius: 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -274,4 +259,25 @@ h2 {
 
 .btn-primary:hover {
     background-color: #006666;
+}
+
+/* Mobile-specific Adjustments */
+@media (max-width: 576px) {
+    .main-header, .main-nav {
+        flex-direction: column;
+    }
+    .carousel-and-title {
+        flex-direction: column;
+        align-items: center;
+    }
+    .container, .add-pet-form {
+        padding: 10px;
+    }
+    .pet-item {
+        width: 100%;
+        max-width: 300px;
+    }
+    h2 {
+        font-size: 24px;
+    }
 }
