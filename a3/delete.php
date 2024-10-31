@@ -10,23 +10,35 @@ if (!isset($_SESSION['username'])) {
 
 if (isset($_GET['id'])) {
     $pet_id = (int)$_GET['id'];
-    $stmt = $conn->prepare("SELECT image FROM pets WHERE id = ? AND username = ?");
+    
+    // First, fetch the image path for deletion
+    $stmt = $conn->prepare("SELECT image FROM pets WHERE petid = ? AND username = ?");
+    if (!$stmt) {
+        die("Preparation failed: " . $conn->error);
+    }
     $stmt->bind_param("is", $pet_id, $_SESSION['username']);
     $stmt->execute();
     $stmt->bind_result($image);
     $stmt->fetch();
     $stmt->close();
 
-    if ($image && file_exists($image)) {
-        unlink($image);
+    // Delete the image file if it exists
+    $image_path = "images/" . $image;
+    if ($image && file_exists($image_path)) {
+        unlink($image_path);
     }
 
-    $stmt = $conn->prepare("DELETE FROM pets WHERE id = ? AND username = ?");
+    // Now, delete the pet record from the database
+    $stmt = $conn->prepare("DELETE FROM pets WHERE petid = ? AND username = ?");
+    if (!$stmt) {
+        die("Preparation failed: " . $conn->error);
+    }
     $stmt->bind_param("is", $pet_id, $_SESSION['username']);
     $stmt->execute();
     $stmt->close();
 
     header("Location: user.php");
+    exit;
 } else {
     echo "Invalid pet ID.";
 }
@@ -35,5 +47,5 @@ $conn->close();
 ?>
 
 <?php
-include 'includes/footer.inc';      // Footer section
+include 'includes/footer.inc';
 ?>
