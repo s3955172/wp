@@ -16,8 +16,11 @@
 </head>
 <body>
 <header class="main-header">
-    <a href="index.php">
-        <img src="images/logo.png" alt="Pets Victoria Logo" class="logo">
-    </a>
+    <div class="logo-title">
+        <a href="index.php">
+            <img src="images/logo.png" alt="Pets Victoria Logo" class="logo">
+        </a>
+        <span class="site-title">Pets Victoria</span>
+    </div>
     <?php include 'nav.inc'; ?>
 </header>
