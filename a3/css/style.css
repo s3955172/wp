@@ -25,10 +25,27 @@ body {
     margin-right: 15px;
 }
 
-.main-header nav a {
+.main-nav {
+    display: flex;
+    align-items: center;
+    background-color: #fcf9ec;
+    padding: 10px 20px;
+}
+
+.main-nav .logo {
+    height: 50px;
+    margin-right: 15px;
+}
+
+.main-nav a {
     margin: 0 10px;
     text-decoration: none;
     color: #333;
+    font-weight: bold;
+}
+
+.main-nav a:hover {
+    color: #008080;
 }
 
 /* Carousel and Title Layout */
