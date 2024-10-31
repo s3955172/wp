@@ -13,22 +13,21 @@ if (isset($_GET['id'])) {
     
     // Fetch pet data
     $stmt = $conn->prepare("SELECT * FROM pets WHERE petid = ?");
-    if (!$stmt) {
-        die("Preparation failed: " . $conn->error);
-    }
     $stmt->bind_param("i", $pet_id);
     $stmt->execute();
     $pet = $stmt->get_result()->fetch_assoc();
     $stmt->close();
     
     if (!$pet) {
-        echo "Pet not found.";
+        echo "<p>Pet not found.</p>";
+        include 'includes/footer.inc';
         exit;
     }
     
-    // Check if the user owns the pet
+    // Check if the logged-in user owns the pet
     if ($pet['username'] != $_SESSION['username']) {
-        echo "Unauthorized access.";
+        echo "<p>Unauthorized access.</p>";
+        include 'includes/footer.inc';
         exit;
     }
 }
@@ -49,73 +48,71 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($pet)) {
 
         if (move_uploaded_file($_FILES["pet_image"]["tmp_name"], $target_file)) {
             // Delete old image
-            if (file_exists($target_dir . $pet['image']) && $pet['image'] != $file_name) {
+            if (file_exists($target_dir . $pet['image'])) {
                 unlink($target_dir . $pet['image']);
             }
             $updated_image = $file_name;
         } else {
-            echo "Failed to upload new image.";
+            echo "<p class='error-message'>Failed to upload new image.</p>";
         }
     }
 
     // Update pet data
     $stmt = $conn->prepare("UPDATE pets SET petname = ?, type = ?, description = ?, age = ?, location = ?, image = ? WHERE petid = ?");
-    if (!$stmt) {
-        die("Preparation failed: " . $conn->error);
-    }
     $stmt->bind_param("sssissi", $pet_name, $type, $description, $age, $location, $updated_image, $pet_id);
 
     if ($stmt->execute()) {
         header("Location: details.php?id=" . $pet_id);
         exit;
     } else {
-        echo "Error: " . $stmt->error;
+        echo "<p class='error-message'>Error: " . $stmt->error . "</p>";
     }
 
     $stmt->close();
 }
-
-$conn->close();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Pet</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h2>Edit Pet Details</h2>
-        <form action="edit.php?id=<?php echo $pet_id; ?>" method="post" enctype="multipart/form-data">
-            <label for="pet_name">Pet Name:</label>
-            <input type="text" name="pet_name" id="pet_name" value="<?php echo htmlspecialchars($pet['petname']); ?>" required>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Edit Pet Details</h2>
+    <form action="edit.php?id=<?php echo $pet_id; ?>" method="post" enctype="multipart/form-data" class="add-pet-form">
+        <div class="mb-3">
+            <label for="pet_name" class="form-label">Pet Name:</label>
+            <input type="text" name="pet_name" id="pet_name" class="form-control" value="<?php echo htmlspecialchars($pet['petname']); ?>" required>
+        </div>
 
-            <label for="type">Type:</label>
-            <input type="text" name="type" id="type" value="<?php echo htmlspecialchars($pet['type']); ?>" required>
+        <div class="mb-3">
+            <label for="type" class="form-label">Type:</label>
+            <input type="text" name="type" id="type" class="form-control" value="<?php echo htmlspecialchars($pet['type']); ?>" required>
+        </div>
 
-            <label for="description">Description:</label>
-            <textarea name="description" id="description" required><?php echo htmlspecialchars($pet['description']); ?></textarea>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea name="description" id="description" class="form-control" required><?php echo htmlspecialchars($pet['description']); ?></textarea>
+        </div>
 
-            <label for="age">Age (Months):</label>
-            <input type="number" name="age" id="age" value="<?php echo htmlspecialchars($pet['age']); ?>" required>
+        <div class="mb-3">
+            <label for="age" class="form-label">Age (Months):</label>
+            <input type="number" name="age" id="age" class="form-control" value="<?php echo htmlspecialchars($pet['age']); ?>" required>
+        </div>
 
-            <label for="location">Location:</label>
-            <input type="text" name="location" id="location" value="<?php echo htmlspecialchars($pet['location']); ?>" required>
+        <div class="mb-3">
+            <label for="location" class="form-label">Location:</label>
+            <input type="text" name="location" id="location" class="form-control" value="<?php echo htmlspecialchars($pet['location']); ?>" required>
+        </div>
 
-            <label for="pet_image">Pet Image (Optional):</label>
-            <input type="file" name="pet_image" id="pet_image">
+        <div class="mb-3">
+            <label for="pet_image" class="form-label">Pet Image (Optional):</label>
+            <input type="file" name="pet_image" id="pet_image" class="form-control">
+            <?php if ($pet['image']): ?>
+                <small>Current image: <?php echo htmlspecialchars($pet['image']); ?></small>
+            <?php endif; ?>
+        </div>
 
-            <div class="button-container">
-                <button type="submit" class="button-primary">Update Pet</button>
-                <a href="details.php?id=<?php echo $pet_id; ?>" class="button-secondary">Cancel</a>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Update Pet</button>
+            <a href="details.php?id=<?php echo $pet_id; ?>" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
 
-<?php
-include 'includes/footer.inc';      // Footer section
-?>
+<?php include 'includes/footer.inc'; ?>
