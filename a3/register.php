@@ -5,7 +5,7 @@ include 'includes/header.inc';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = htmlspecialchars($_POST['username']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password
+    $password = hash('sha1', $_POST['password']); // Hash the password with SHA-1
 
     // Prepare SQL to insert username and hashed password
     $stmt = $conn->prepare("INSERT INTO users (username, password, reg_date) VALUES (?, ?, NOW())");
@@ -16,8 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: index.php"); // Redirect to the homepage after successful registration
         exit;
     } else {
-        // Output a detailed error message for debugging
-        $error = "Registration failed: " . $stmt->error;
+        $error = "Registration failed. Please try again.";
     }
     $stmt->close();
 }
