@@ -60,6 +60,7 @@ body {
     max-width: 1000px;
     margin-bottom: 20px;
     gap: 20px;
+    justify-content: center; /* Centering the entire section */
 }
 
 .carousel-container {
@@ -95,11 +96,11 @@ body {
 /* Search UI Styling */
 .search-container {
     width: 100%;
-    max-width: 1000px; /* Ensures the search bar matches the carousel width */
+    max-width: 1000px; /* Matches carousel width */
     display: flex;
-    align-items: center;
     gap: 10px;
-    margin: 0 auto 20px auto; /* Centers the search bar */
+    justify-content: center;
+    margin: 0 auto 20px auto; /* Centers and adds margin below */
     padding: 0;
 }
 
@@ -107,12 +108,16 @@ body {
     flex: 2; /* Expands the text input */
     padding: 10px;
     font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 .search-container select {
     flex: 1; /* Expands the select input */
     padding: 10px;
     font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 .search-container button {
@@ -121,6 +126,7 @@ body {
     background-color: #008080;
     color: #fff;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -139,6 +145,7 @@ body {
     .search-container select,
     .search-container button {
         width: 100%; /* Full-width on smaller screens */
+        margin-bottom: 10px;
     }
 }
 
@@ -291,25 +298,4 @@ footer {
 
 .btn-primary:hover {
     background-color: #006666;
-}
-
-/* Mobile-specific Adjustments */
-@media (max-width: 576px) {
-    .main-header, .main-nav {
-        flex-direction: column;
-    }
-    .carousel-and-title {
-        flex-direction: column;
-        align-items: center;
-    }
-    .container, .add-pet-form {
-        padding: 10px;
-    }
-    .pet-item {
-        width: 100%;
-        max-width: 300px;
-    }
-    h2 {
-        font-size: 24px;
-    }
 }
