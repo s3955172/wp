@@ -5,22 +5,21 @@ include 'includes/header.inc';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = htmlspecialchars($_POST['username']);
-    $password = htmlspecialchars($_POST['password']);
-    
-    $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->bind_result($hashed_password);
-    $stmt->fetch();
-    $stmt->close();
+    $password = hash('sha1', $_POST['password']); // SHA-1 for compatibility with CHAR(40)
 
-    if (password_verify($password, $hashed_password)) {
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+    $stmt->bind_param("ss", $username, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
         $_SESSION['username'] = $username;
-        header("Location: index.php");
+        header("Location: index.php"); // Redirect to home page after successful login
         exit;
     } else {
         $error = "Invalid username or password.";
     }
+    $stmt->close();
 }
 ?>
 
