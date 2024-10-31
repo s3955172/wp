@@ -3,7 +3,7 @@ session_start();
 include 'includes/db_connect.inc';
 include 'includes/header.inc';
 
-// Fetch all pets initially
+// Fetch all pets or filter by type if specified
 $typeFilter = isset($_GET['type']) ? $_GET['type'] : 'all';
 $query = "SELECT * FROM pets" . ($typeFilter != 'all' ? " WHERE type = ?" : "");
 $stmt = $conn->prepare($query);
@@ -34,8 +34,11 @@ $stmt->close();
     <div class="gallery-container">
         <?php foreach ($pets as $pet): ?>
             <div class="pet-item">
-                <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" alt="<?php echo htmlspecialchars($pet['petname']); ?>" class="pet-image">
-                <p class="pet-name"><?php echo htmlspecialchars($pet['petname']); ?></p>
+                <!-- Link to details.php with petid as parameter -->
+                <a href="details.php?id=<?php echo $pet['petid']; ?>">
+                    <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" alt="<?php echo htmlspecialchars($pet['petname']); ?>" class="pet-image">
+                    <p class="pet-name"><?php echo htmlspecialchars($pet['petname']); ?></p>
+                </a>
             </div>
         <?php endforeach; ?>
     </div>
