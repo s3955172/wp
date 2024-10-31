@@ -20,7 +20,7 @@ $result = $conn->query("SELECT image FROM pets ORDER BY petid DESC LIMIT 4");
                     while ($image = $result->fetch_assoc()):
                     ?>
                         <div class="carousel-item <?php if ($isActive) { echo 'active'; $isActive = false; } ?>">
-                            <img src="images/<?php echo htmlspecialchars($image['image']); ?>" class="d-block w-100" alt="Pet image">
+                            <img src="images/<?php echo htmlspecialchars($image['image']); ?>" class="d-block w-100" alt="Pet image" style="height: 250px; object-fit: cover;">
                         </div>
                     <?php endwhile; ?>
                 </div>
@@ -45,14 +45,14 @@ $result = $conn->query("SELECT image FROM pets ORDER BY petid DESC LIMIT 4");
     <!-- Search UI -->
     <div class="search-container">
         <form action="search.php" method="get">
-            <input type="text" name="pet_name" placeholder="I am looking for (pet name)">
-            <select name="pet_type">
+            <input type="text" name="pet_name" placeholder="I am looking for (pet name)" class="form-control mb-2" style="flex: 1;">
+            <select name="pet_type" class="form-select mb-2" style="flex: 1;">
                 <option value="">Select your pet type</option>
                 <option value="Cat">Cat</option>
                 <option value="Dog">Dog</option>
                 <!-- Add other types as needed -->
             </select>
-            <button type="submit">Search</button>
+            <button type="submit" class="btn btn-primary">Search</button>
         </form>
     </div>
 
