@@ -1,32 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pets Victoria</title>
-    
-    <!-- Link to custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Link to Bootstrap CSS from CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    
-    <!-- Link to custom JavaScript file -->
-    <script src="js/scripts.js" defer></script>
-</head>
-<body>
-<header class="main-header">
-    <div class="logo-title">
+<!-- header.inc -->
+<div class="main-header">
+    <!-- Logo and Site Title -->
+    <div class="logo-title d-flex align-items-center">
         <a href="index.php">
             <img src="images/logo.png" alt="Pets Victoria Logo" class="logo">
         </a>
-        <span class="site-title">Pets Victoria</span>
+        <span class="site-title ms-2">Pets Victoria</span>
     </div>
     
-    <!-- Search Bar and Dropdown Menu -->
-    <div class="header-right d-flex align-items-center gap-3">
+    <!-- Search Bar and Dropdown Menu in Top Right -->
+    <div class="header-right d-flex align-items-center gap-3 ms-auto">
         <!-- Search Bar -->
-        <form action="search.php" method="get" class="search-bar-form d-flex align-items-center">
+        <form action="search.php" method="get" class="d-flex align-items-center">
             <input type="text" name="pet_name" placeholder="Search for pets..." class="form-control me-2" style="width: auto;">
             <button type="submit" class="btn btn-primary btn-sm">Search</button>
         </form>
@@ -47,18 +32,4 @@
             </ul>
         </div>
     </div>
-    
-    <!-- Include the Navigation -->
-    <?php include 'nav.inc'; ?>
-</header>
-
-<!-- Main Content -->
-<!-- Content for the page goes here -->
-
-<!-- Footer -->
-<?php include 'includes/footer.inc'; ?>
-
-<!-- Bootstrap JavaScript CDN -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
