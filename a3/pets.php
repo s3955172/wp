@@ -8,32 +8,28 @@ $result = $conn->query("SELECT * FROM pets");
 
 <div class="container mt-5">
     <h2 class="text-center mb-4">All Pets</h2>
-    <table class="table table-striped table-bordered">
-        <thead class="table-primary">
-            <tr>
-                <th>Pet</th>
-                <th>Type</th>
-                <th>Age (months)</th>
-                <th>Location</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($pet = $result->fetch_assoc()): ?>
-                <tr>
-                    <td>
-                        <a href="details.php?id=<?php echo $pet['petid']; ?>" class="text-decoration-none text-dark">
-                            <?php echo htmlspecialchars($pet['petname']); ?>
-                        </a>
-                        <br>
-                        <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" alt="<?php echo htmlspecialchars($pet['petname']); ?>" width="80" height="80" class="rounded">
-                    </td>
-                    <td><?php echo htmlspecialchars($pet['type']); ?></td>
-                    <td><?php echo htmlspecialchars($pet['age']); ?></td>
-                    <td><?php echo htmlspecialchars($pet['location']); ?></td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
+    <div class="row">
+        <?php while ($pet = $result->fetch_assoc()): ?>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 rounded">
+                    <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" class="card-img-top rounded-top" alt="<?php echo htmlspecialchars($pet['petname']); ?>" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center mb-3">
+                            <a href="details.php?id=<?php echo $pet['petid']; ?>" class="text-decoration-none text-dark">
+                                <?php echo htmlspecialchars($pet['petname']); ?>
+                            </a>
+                        </h5>
+                        <p class="card-text"><strong>Type:</strong> <?php echo htmlspecialchars($pet['type']); ?></p>
+                        <p class="card-text"><strong>Age:</strong> <?php echo htmlspecialchars($pet['age']); ?> months</p>
+                        <p class="card-text"><strong>Location:</strong> <?php echo htmlspecialchars($pet['location']); ?></p>
+                    </div>
+                    <div class="card-footer bg-white text-center">
+                        <a href="details.php?id=<?php echo $pet['petid']; ?>" class="btn btn-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+        <?php endwhile; ?>
+    </div>
 </div>
 
 <?php include 'includes/footer.inc'; ?>
