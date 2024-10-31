@@ -3,8 +3,13 @@ session_start();
 include 'includes/db_connect.inc';
 include 'includes/header.inc';
 
+// Fetch all pets
 $result = $conn->query("SELECT * FROM pets");
 
+if ($result === false) {
+    echo "Error fetching pets: " . $conn->error;
+    exit;
+}
 ?>
 
 <div class="container">
@@ -12,9 +17,9 @@ $result = $conn->query("SELECT * FROM pets");
     <div class="gallery-container">
         <?php while ($pet = $result->fetch_assoc()): ?>
             <div class="pet-item">
-                <a href="details.php?id=<?php echo $pet['id']; ?>">
-                    <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" alt="<?php echo htmlspecialchars($pet['name']); ?>">
-                    <p><?php echo htmlspecialchars($pet['name']); ?></p>
+                <a href="details.php?id=<?php echo $pet['petid']; ?>">
+                    <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" alt="<?php echo htmlspecialchars($pet['petname']); ?>">
+                    <p><?php echo htmlspecialchars($pet['petname']); ?></p>
                 </a>
             </div>
         <?php endwhile; ?>
