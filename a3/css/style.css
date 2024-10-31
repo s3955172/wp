@@ -247,26 +247,31 @@ h2 {
 .error-message {
     background-color: #f44336;
 }
+
 .card {
     border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: scale(1.03);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-.card-img-top {
-    border-bottom: 1px solid #ddd;
+.card-footer {
+    border-top: 1px solid #f0f0f0;
 }
 
 .card-title {
-    font-weight: bold;
+    font-weight: 600;
     color: #008080;
 }
 
-.card-text {
-    color: #555;
+.btn-primary {
+    background-color: #008080;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #006666;
 }
