@@ -43,11 +43,11 @@ $result = $conn->query("SELECT image FROM pets ORDER BY petid DESC LIMIT 4");
     </div>
 
     <!-- Search UI -->
-    <div class="search-container">
-        <form action="search.php" method="get">
-            <input type="text" name="pet_name" placeholder="I am looking for" class="form-control mb-2" style="flex: 1;">
-            <select name="pet_type" class="form-select mb-2" style="flex: 1;">
-                <option value="">Select your pet type</option>
+    <div class="search-container mt-4 mb-4">
+        <form action="search.php" method="get" class="d-flex gap-2 align-items-center">
+            <input type="text" name="keyword" placeholder="Search by pet name or keyword..." class="form-control" style="flex: 2;">
+            <select name="type" class="form-select" style="flex: 1;">
+                <option value="">Select Pet Type</option>
                 <option value="Cat">Cat</option>
                 <option value="Dog">Dog</option>
                 <!-- Add other types as needed -->
@@ -57,7 +57,7 @@ $result = $conn->query("SELECT image FROM pets ORDER BY petid DESC LIMIT 4");
     </div>
 
     <!-- Discover Section -->
-    <div class="discover-section">
+    <div class="discover-section text-center mt-5">
         <h2>Discover Pets Victoria</h2>
         <p>Pets Victoria is a dedicated pet adoption organisation based in Victoria, Australia, focused on providing a safe and loving environment for pets in need. With a compassionate approach, Pets Victoria works tirelessly to rescue, rehabilitate, and rehome dogs, cats, and other animals. Their mission is to connect these deserving pets with caring individuals and families, creating lifelong bonds. The organisation offers a range of services, including adoption counseling, pet education, and community support programs, all aimed at promoting responsible pet ownership and reducing the number of homeless animals.</p>
     </div>
