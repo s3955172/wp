@@ -11,9 +11,10 @@ body {
 .main-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background-color: #fcf9ec;
+    background-color: #05668d; /* Dark green-blue for header */
     padding: 10px 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .logo-title {
@@ -22,27 +23,15 @@ body {
     gap: 10px;
 }
 
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
 .site-title {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
-}
-
-.search-bar-form {
-    display: inline-flex;
-    gap: 5px;
-    align-items: center;
-}
-
-.dropdown .btn-secondary {
-    background-color: #008080;
-    color: #fff;
-    border: none;
-    transition: background-color 0.3s ease;
-}
-
-.dropdown .btn-secondary:hover {
-    background-color: #006666;
+    color: #ffffff;
 }
 
 .main-nav {
