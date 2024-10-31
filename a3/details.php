@@ -33,4 +33,4 @@ if (isset($_GET['id'])) {
     <?php endif; ?>
 </div>
 
-<?php include 'footer.inc'; ?>
+<?php include 'includes/footer.inc'; ?>
