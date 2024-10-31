@@ -19,15 +19,16 @@ $stmt->close();
 
 <div class="container">
     <h2>Your Uploaded Pets</h2>
-    <?php if ($userPets): ?>
-        <ul>
-            <?php foreach ($userPets as $pet): ?>
-                <li><a href="details.php?id=<?php echo $pet['id']; ?>"><?php echo htmlspecialchars($pet['name']); ?></a></li>
-            <?php endforeach; ?>
-        </ul>
-    <?php else: ?>
-        <p>You haven't uploaded any pets yet.</p>
-    <?php endif; ?>
+    <div class="gallery-container">
+        <?php foreach ($userPets as $pet): ?>
+            <div class="pet-item">
+                <a href="details.php?id=<?php echo $pet['id']; ?>">
+                    <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" alt="<?php echo htmlspecialchars($pet['name']); ?>">
+                    <p><?php echo htmlspecialchars($pet['name']); ?></p>
+                </a>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>
 
 <?php include 'footer.inc'; ?>
