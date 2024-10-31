@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($pet)) {
     $description = htmlspecialchars($_POST['description']);
     $age = (int)$_POST['age'];
     $location = htmlspecialchars($_POST['location']);
+    $caption = htmlspecialchars($_POST['caption']);
     $updated_image = $pet['image'];
 
     // Handle file upload if a new image is provided
@@ -58,8 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($pet)) {
     }
 
     // Update pet data
-    $stmt = $conn->prepare("UPDATE pets SET petname = ?, type = ?, description = ?, age = ?, location = ?, image = ? WHERE petid = ?");
-    $stmt->bind_param("sssissi", $pet_name, $type, $description, $age, $location, $updated_image, $pet_id);
+    $stmt = $conn->prepare("UPDATE pets SET petname = ?, type = ?, description = ?, age = ?, location = ?, caption = ?, image = ? WHERE petid = ?");
+    $stmt->bind_param("ssssissi", $pet_name, $type, $description, $age, $location, $caption, $updated_image, $pet_id);
 
     if ($stmt->execute()) {
         header("Location: details.php?id=" . $pet_id);
@@ -82,7 +83,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($pet)) {
 
         <div class="mb-3">
             <label for="type" class="form-label">Type:</label>
-            <input type="text" name="type" id="type" class="form-control" value="<?php echo htmlspecialchars($pet['type']); ?>" required>
+            <select name="type" id="type" class="form-select" required>
+                <option value="Cat" <?php echo ($pet['type'] == "Cat") ? "selected" : ""; ?>>Cat</option>
+                <option value="Dog" <?php echo ($pet['type'] == "Dog") ? "selected" : ""; ?>>Dog</option>
+            </select>
         </div>
 
         <div class="mb-3">
@@ -98,6 +102,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($pet)) {
         <div class="mb-3">
             <label for="location" class="form-label">Location:</label>
             <input type="text" name="location" id="location" class="form-control" value="<?php echo htmlspecialchars($pet['location']); ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="caption" class="form-label">Caption:</label>
+            <input type="text" name="caption" id="caption" class="form-control" value="<?php echo htmlspecialchars($pet['caption']); ?>" required>
         </div>
 
         <div class="mb-3">
