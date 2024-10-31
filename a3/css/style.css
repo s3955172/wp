@@ -1,7 +1,7 @@
 /* General Styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #fcf9ec; /* Light beige background */
     color: #333;
     margin: 0;
     padding: 0;
@@ -11,7 +11,7 @@ body {
 .main-header {
     display: flex;
     align-items: center;
-    background-color: #fcf9ec;
+    background-color: #05668d; /* Dark green-blue for header */
     padding: 10px 20px;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -31,7 +31,7 @@ body {
 .site-title {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
+    color: #ffffff;
 }
 
 .main-nav {
@@ -43,13 +43,13 @@ body {
 
 .main-nav a {
     text-decoration: none;
-    color: #333;
+    color: #ffffff;
     font-weight: bold;
     white-space: nowrap;
 }
 
 .main-nav a:hover {
-    color: #008080;
+    color: #ffcb7d; /* Soft orange for hover effect */
 }
 
 /* Carousel and Title Layout */
@@ -60,7 +60,7 @@ body {
     max-width: 1000px;
     margin-bottom: 20px;
     gap: 20px;
-    justify-content: center; /* Centering the entire section */
+    justify-content: center;
 }
 
 .carousel-container {
@@ -75,12 +75,12 @@ body {
 
 .welcome-text h1 {
     font-size: 36px;
-    color: #008080;
+    color: #008080; /* Teal for main title */
 }
 
 .welcome-text h3 {
     font-size: 24px;
-    color: #ffcb7d;
+    color: #ffcb7d; /* Soft orange for subtitle */
 }
 
 /* Responsive Text Sizing */
@@ -100,28 +100,27 @@ body {
     display: flex;
     gap: 10px;
     justify-content: center;
-    margin: 0 auto 20px auto; /* Centers and adds margin below */
-    padding: 0;
+    margin: 0 auto 20px auto;
+}
+
+.search-container input[type="text"],
+.search-container select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 .search-container input[type="text"] {
-    flex: 2; /* Expands the text input */
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    flex: 2;
 }
 
 .search-container select {
-    flex: 1; /* Expands the select input */
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    flex: 1;
 }
 
 .search-container button {
-    flex: 0 1 100px; /* Fixed width for button */
+    flex: 0 1 100px;
     padding: 10px;
     background-color: #008080;
     color: #fff;
@@ -135,29 +134,27 @@ body {
     background-color: #006666;
 }
 
-/* For smaller screens */
-@media (max-width: 768px) {
-    .search-container {
-        flex-direction: column;
-    }
-
-    .search-container input[type="text"],
-    .search-container select,
-    .search-container button {
-        width: 100%; /* Full-width on smaller screens */
-        margin-bottom: 10px;
-    }
-}
-
 /* Discover Section */
 .discover-section {
+    max-width: 800px;
+    margin: 0 auto 20px auto;
     text-align: center;
     padding: 20px;
+    background-color: #fcf9ec;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .discover-section h2 {
     font-size: 28px;
     color: #008080;
+    margin-bottom: 10px;
+}
+
+.discover-section p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
 }
 
 /* Gallery Styling */
@@ -193,9 +190,9 @@ body {
 
 /* Image Styling within Cards or Pet Items */
 .pet-image, .card-img-top {
-    width: 100%;          /* Ensures the image takes full width of its container */
-    max-height: 250px;    /* Limits height to prevent overly large images */
-    object-fit: cover;    /* Maintains aspect ratio and prevents distortion */
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -303,4 +300,25 @@ footer p {
 
 .btn-primary:hover {
     background-color: #006666;
+}
+
+/* Mobile-specific Adjustments */
+@media (max-width: 576px) {
+    .main-header, .main-nav {
+        flex-direction: column;
+    }
+    .carousel-and-title {
+        flex-direction: column;
+        align-items: center;
+    }
+    .container, .add-pet-form {
+        padding: 10px;
+    }
+    .pet-item {
+        width: 100%;
+        max-width: 300px;
+    }
+    h2 {
+        font-size: 24px;
+    }
 }
