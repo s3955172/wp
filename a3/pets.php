@@ -6,10 +6,10 @@ include 'includes/header.inc';
 $result = $conn->query("SELECT * FROM pets");
 ?>
 
-<div class="container">
-    <h2>All Pets</h2>
-    <table class="table table-striped">
-        <thead>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">All Pets</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="table-primary">
             <tr>
                 <th>Pet</th>
                 <th>Type</th>
@@ -21,11 +21,11 @@ $result = $conn->query("SELECT * FROM pets");
             <?php while ($pet = $result->fetch_assoc()): ?>
                 <tr>
                     <td>
-                        <a href="details.php?id=<?php echo $pet['petid']; ?>">
+                        <a href="details.php?id=<?php echo $pet['petid']; ?>" class="text-decoration-none text-dark">
                             <?php echo htmlspecialchars($pet['petname']); ?>
                         </a>
                         <br>
-                        <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" alt="<?php echo htmlspecialchars($pet['petname']); ?>" width="80" height="80">
+                        <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" alt="<?php echo htmlspecialchars($pet['petname']); ?>" width="80" height="80" class="rounded">
                     </td>
                     <td><?php echo htmlspecialchars($pet['type']); ?></td>
                     <td><?php echo htmlspecialchars($pet['age']); ?></td>
