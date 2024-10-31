@@ -95,25 +95,29 @@ body {
 /* Search UI Styling */
 .search-container {
     width: 100%;
-    max-width: 1000px; /* Matches the carousel's max-width */
+    max-width: 1000px; /* Ensures the search bar matches the carousel width */
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    gap: 10px; /* Add spacing between input elements */
-    flex-wrap: wrap;
-    padding: 0 10px; /* Add padding for alignment with carousel */
+    gap: 10px;
+    margin: 0 auto 20px auto; /* Centers the search bar */
+    padding: 0;
 }
 
-.search-container input[type="text"],
+.search-container input[type="text"] {
+    flex: 2; /* Expands the text input */
+    padding: 10px;
+    font-size: 16px;
+}
+
 .search-container select {
-    flex: 1; /* Expands these inputs to fill the container width */
+    flex: 1; /* Expands the select input */
     padding: 10px;
     font-size: 16px;
 }
 
 .search-container button {
-    flex: 0 1 100px; /* Gives the button a fixed width */
+    flex: 0 1 100px; /* Fixed width for button */
+    padding: 10px;
     background-color: #008080;
     color: #fff;
     border: none;
@@ -123,6 +127,19 @@ body {
 
 .search-container button:hover {
     background-color: #006666;
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+    .search-container {
+        flex-direction: column;
+    }
+
+    .search-container input[type="text"],
+    .search-container select,
+    .search-container button {
+        width: 100%; /* Full-width on smaller screens */
+    }
 }
 
 /* Discover Section */
