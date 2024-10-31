@@ -21,4 +21,4 @@ $result = $conn->query("SELECT * FROM pets");
     </div>
 </div>
 
-<?php include 'footer.inc'; ?>
+<?php include 'includes/footer.inc'; ?>
