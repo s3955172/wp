@@ -153,13 +153,15 @@ body {
     color: inherit;
 }
 
-.pet-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+/* Image Styling within Cards or Pet Items */
+.pet-image, .card-img-top {
+    width: 100%;          /* Ensures the image takes full width of its container */
+    max-height: 250px;    /* Limits height to prevent overly large images */
+    object-fit: cover;    /* Maintains aspect ratio and prevents distortion */
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 
 .pet-name {
     font-size: 18px;
