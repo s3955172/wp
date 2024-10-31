@@ -1,39 +1,41 @@
-<?php 
-include('includes/header.inc');
-include('includes/nav.inc');
+<?php
+session_start();
+include 'db_connect.inc';
+include 'header.inc';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = trim($_POST['username']);
-    $password = hash('sha256', $_POST['password']); // Hash password
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = htmlspecialchars($_POST['username']);
+    $password = htmlspecialchars($_POST['password']);
+    
+    $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->bind_result($hashed_password);
+    $stmt->fetch();
+    $stmt->close();
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
-    $stmt->execute(['username' => $username, 'password' => $password]);
-
-    if ($stmt->rowCount() == 1) {
+    if (password_verify($password, $hashed_password)) {
         $_SESSION['username'] = $username;
         header("Location: index.php");
         exit;
     } else {
-        echo "Invalid login credentials. Please try again.";
+        $error = "Invalid username or password.";
     }
 }
 ?>
 
-<main class="container">
+<div class="container">
     <h2>Login</h2>
-    <form action="login.php" method="POST">
-        <div class="mb-3">
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username" class="form-control" required>
-        </div>
-        
-        <div class="mb-3">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" class="form-control" required>
-        </div>
-        
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-</main>
+    <form method="post" action="">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required>
 
-<?php include('includes/footer.inc'); ?>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+
+        <button type="submit">Login</button>
+        <?php if (isset($error)) echo "<p>$error</p>"; ?>
+    </form>
+</div>
+
+<?php include 'footer.inc'; ?>
