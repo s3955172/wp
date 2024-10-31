@@ -8,11 +8,11 @@ $result = $conn->query("SELECT image FROM pets ORDER BY petid DESC LIMIT 4");
 ?>
 
 <!-- Main Content Container -->
-<div class="container homepage">
+<div class="container-fluid homepage px-4">
     <!-- Carousel and Welcome Text Section -->
-    <div class="carousel-and-title">
+    <div class="carousel-and-title d-flex flex-column align-items-center">
         <!-- Photo Carousel -->
-        <div class="carousel-container">
+        <div class="carousel-container w-100 mb-4">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <?php
@@ -36,15 +36,15 @@ $result = $conn->query("SELECT image FROM pets ORDER BY petid DESC LIMIT 4");
         </div>
 
         <!-- Welcome Text -->
-        <div class="welcome-text">
+        <div class="welcome-text text-center mb-4">
             <h1>PETS VICTORIA</h1>
             <h3>WELCOME TO PET ADOPTION</h3>
         </div>
     </div>
 
-    <!-- Search UI -->
-    <div class="search-container mt-4 mb-4">
-        <form action="search.php" method="get" class="d-flex gap-2 align-items-center">
+    <!-- Full-Width Search UI -->
+    <div class="search-container w-100 mb-4">
+        <form action="search.php" method="get" class="d-flex gap-2">
             <input type="text" name="keyword" placeholder="Search by pet name or keyword..." class="form-control" style="flex: 2;">
             <select name="type" class="form-select" style="flex: 1;">
                 <option value="">Select Pet Type</option>
