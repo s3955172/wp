@@ -3,7 +3,14 @@ session_start();
 include 'includes/db_connect.inc';
 include 'includes/header.inc';
 
+// Execute the query to get the latest 4 images
 $result = $conn->query("SELECT image FROM pets ORDER BY id DESC LIMIT 4");
+
+if ($result === false) {
+    // Display an error message if the query fails
+    echo "<p>Error fetching images: " . $conn->error . "</p>";
+    exit;
+}
 ?>
 
 <div class="container">
