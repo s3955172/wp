@@ -19,6 +19,5 @@
     <a href="index.php">
         <img src="images/logo.png" alt="Pets Victoria Logo" class="logo">
     </a>
-    <h1>PETS VICTORIA</h1>
     <?php include 'nav.inc'; ?>
 </header>
