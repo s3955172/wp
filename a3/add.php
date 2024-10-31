@@ -39,4 +39,4 @@ if (!isset($_SESSION['username'])) {
     </form>
 </div>
 
-<?php include 'footer.inc'; ?>
+<?php include 'includes/footer.inc'; ?>
