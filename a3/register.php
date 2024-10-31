@@ -7,13 +7,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = htmlspecialchars($_POST['username']);
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password
 
-    // Insert only the username and password
+    // Prepare SQL to insert username and hashed password
     $stmt = $conn->prepare("INSERT INTO users (username, password, reg_date) VALUES (?, ?, NOW())");
     $stmt->bind_param("ss", $username, $password);
     
     if ($stmt->execute()) {
         $_SESSION['username'] = $username;
-        header("Location: index.php"); // Redirect to the home page after successful registration
+        header("Location: index.php"); // Redirect to the homepage after successful registration
         exit;
     } else {
         $error = "Registration failed. Please try again.";
