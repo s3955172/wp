@@ -1,7 +1,7 @@
 <?php
 session_start();
-include 'db_connect.inc';
-include 'header.inc';
+include 'includes/db_connect.inc';
+include 'includes/header.inc';
 
 $result = $conn->query("SELECT image FROM pets ORDER BY id DESC LIMIT 4");
 ?>
