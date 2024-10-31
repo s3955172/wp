@@ -1,7 +1,7 @@
 <?php
 session_start();
-include 'db_connect.inc';
-include 'header.inc';
+include 'includes/db_connect.inc';
+include 'includes/header.inc';
 
 if (isset($_GET['id'])) {
     $pet_id = (int)$_GET['id'];
