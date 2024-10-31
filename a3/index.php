@@ -45,7 +45,7 @@ $result = $conn->query("SELECT image FROM pets ORDER BY petid DESC LIMIT 4");
     <!-- Search UI -->
     <div class="search-container">
         <form action="search.php" method="get">
-            <input type="text" name="pet_name" placeholder="I am looking for (pet name)" class="form-control mb-2" style="flex: 1;">
+            <input type="text" name="pet_name" placeholder="I am looking for" class="form-control mb-2" style="flex: 1;">
             <select name="pet_type" class="form-select mb-2" style="flex: 1;">
                 <option value="">Select your pet type</option>
                 <option value="Cat">Cat</option>
