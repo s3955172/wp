@@ -15,17 +15,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $location = htmlspecialchars($_POST['location']);
     $username = $_SESSION['username'];
 
+    // Handle file upload
     if (isset($_FILES['pet_image']) && $_FILES['pet_image']['error'] == 0) {
         $target_dir = "images/";
-        $file_name = basename($_FILES["pet_image"]["name"]);
-        $target_file = $target_dir . uniqid() . "_" . $file_name;
+        $file_name = uniqid() . "_" . basename($_FILES["pet_image"]["name"]);
+        $target_file = $target_dir . $file_name;
         
         if (move_uploaded_file($_FILES["pet_image"]["tmp_name"], $target_file)) {
+            // Prepare and execute the query
             $stmt = $conn->prepare("INSERT INTO pets (name, type, description, age, location, image, username) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssiss", $pet_name, $type, $description, $age, $location, $target_file, $username);
+            $stmt->bind_param("sssisss", $pet_name, $type, $description, $age, $location, $file_name, $username);
             
             if ($stmt->execute()) {
                 header("Location: gallery.php");
+                exit;
             } else {
                 echo "Error: " . $stmt->error;
             }
@@ -35,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Failed to upload image.";
         }
     } else {
-        echo "No image uploaded or upload error.";
+        echo "No image uploaded or there was an upload error.";
     }
 }
 
