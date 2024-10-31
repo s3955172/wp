@@ -5,14 +5,15 @@ include 'includes/header.inc';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = htmlspecialchars($_POST['username']);
-    $email = htmlspecialchars($_POST['email']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password
 
-    $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $email, $password);
+    // Insert only the username and password
+    $stmt = $conn->prepare("INSERT INTO users (username, password, reg_date) VALUES (?, ?, NOW())");
+    $stmt->bind_param("ss", $username, $password);
+    
     if ($stmt->execute()) {
         $_SESSION['username'] = $username;
-        header("Location: index.php");
+        header("Location: index.php"); // Redirect to the home page after successful registration
         exit;
     } else {
         $error = "Registration failed. Please try again.";
@@ -26,9 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form method="post" action="">
         <label for="username">Username:</label>
         <input type="text" name="username" id="username" required>
-
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required>
 
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" required>
