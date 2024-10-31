@@ -5,7 +5,7 @@ include 'includes/header.inc';
 
 if (!isset($_SESSION['username'])) {
     echo "<p>You must be logged in to view this page.</p>";
-    include 'footer.inc';
+    include 'includes/footer.inc';
     exit;
 }
 
@@ -22,9 +22,9 @@ $stmt->close();
     <div class="gallery-container">
         <?php foreach ($userPets as $pet): ?>
             <div class="pet-item">
-                <a href="details.php?id=<?php echo $pet['id']; ?>">
-                    <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" alt="<?php echo htmlspecialchars($pet['name']); ?>">
-                    <p><?php echo htmlspecialchars($pet['name']); ?></p>
+                <a href="details.php?id=<?php echo $pet['petid']; ?>">
+                    <img src="images/<?php echo htmlspecialchars($pet['image']); ?>" alt="<?php echo htmlspecialchars($pet['petname']); ?>" class="pet-image">
+                    <p><?php echo htmlspecialchars($pet['petname']); ?></p>
                 </a>
             </div>
         <?php endforeach; ?>
