@@ -31,4 +31,4 @@ $result = $conn->query("SELECT image FROM pets ORDER BY id DESC LIMIT 4");
     </div>
 </div>
 
-<?php include 'footer.inc'; ?>
+<?php include 'includes/footer.inc'; ?>
