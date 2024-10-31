@@ -70,3 +70,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($pet)) {
 
 $conn->close();
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Pet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Pet Details</h2>
+        <form action="edit.php?id=<?php echo $pet_id; ?>" method="post" enctype="multipart/form-data">
+            <label for="pet_name">Pet Name:</label>
+            <input type="text" name="pet_name" id="pet_name" value="<?php echo htmlspecialchars($pet['name']); ?>" required>
+
+            <label for="type">Type:</label>
+            <input type="text" name="type" id="type" value="<?php echo htmlspecialchars($pet['type']); ?>" required>
+
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" required><?php echo htmlspecialchars($pet['description']); ?></textarea>
+
+            <label for="age">Age (Months):</label>
+            <input type="number" name="age" id="age" value="<?php echo htmlspecialchars($pet['age']); ?>" required>
+
+            <label for="location">Location:</label>
+            <input type="text" name="location" id="location" value="<?php echo htmlspecialchars($pet['location']); ?>" required>
+
+            <label for="pet_image">Pet Image (Optional):</label>
+            <input type="file" name="pet_image" id="pet_image">
+
+            <div class="button-container">
+                <button type="submit" class="button-primary">Update Pet</button>
+                <a href="details.php?id=<?php echo $pet_id; ?>" class="button-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
