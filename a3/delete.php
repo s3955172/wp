@@ -33,3 +33,7 @@ if (isset($_GET['id'])) {
 
 $conn->close();
 ?>
+
+<?php
+include 'includes/footer.inc';      // Footer section
+?>
