@@ -95,23 +95,25 @@ body {
 /* Search UI Styling */
 .search-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px; /* Matches the carousel's max-width */
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    gap: 10px; /* Add spacing between input elements */
     flex-wrap: wrap;
+    padding: 0 10px; /* Add padding for alignment with carousel */
 }
 
 .search-container input[type="text"],
-.search-container select,
-.search-container button {
+.search-container select {
+    flex: 1; /* Expands these inputs to fill the container width */
     padding: 10px;
     font-size: 16px;
-    margin-bottom: 10px;
 }
 
 .search-container button {
+    flex: 0 1 100px; /* Gives the button a fixed width */
     background-color: #008080;
     color: #fff;
     border: none;
