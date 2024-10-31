@@ -109,3 +109,7 @@ $conn->close();
     </div>
 </body>
 </html>
+
+<?php
+include 'includes/footer.inc';      // Footer section
+?>
