@@ -3,11 +3,8 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     color: #333;
-    margin: 0;
-    padding: 0;
 }
 
-/* Container for the Homepage */
 .container.homepage {
     display: flex;
     flex-direction: column;
@@ -19,46 +16,33 @@ body {
 .main-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     background-color: #fcf9ec;
-    padding: 15px 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
 }
 
 .main-header .logo {
     height: 50px;
+    margin-right: 15px;
 }
 
 .main-header nav a {
-    margin: 0 15px;
+    margin: 0 10px;
     text-decoration: none;
     color: #333;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.main-header nav a:hover {
-    color: #008080;
 }
 
 /* Carousel and Title Layout */
 .carousel-and-title {
     display: flex;
-    flex-direction: row;
-    align-items: center;
     width: 100%;
     max-width: 1000px;
-    margin-bottom: 30px;
-    gap: 20px;
+    margin-bottom: 20px;
 }
 
 .carousel-container {
     flex: 1;
     max-width: 300px;
-    margin: 0 auto;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-right: 20px;
 }
 
 .welcome-text {
@@ -69,24 +53,21 @@ body {
 .welcome-text h1 {
     font-size: 36px;
     color: #008080;
-    margin: 0;
 }
 
 .welcome-text h3 {
     font-size: 24px;
     color: #ffcb7d;
-    margin-top: 10px;
 }
 
 /* Search UI Styling */
 .search-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 20px 0;
     width: 100%;
-    max-width: 700px;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .search-container input[type="text"],
@@ -94,10 +75,7 @@ body {
 .search-container button {
     padding: 10px;
     font-size: 16px;
-    width: 100%;
-    max-width: 200px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    margin-right: 10px;
 }
 
 .search-container button {
@@ -115,53 +93,67 @@ body {
 /* Discover Section */
 .discover-section {
     text-align: center;
-    padding: 30px 20px;
-    background-color: #f0f8f8;
-    width: 100%;
-    max-width: 1000px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    padding: 20px;
 }
 
 .discover-section h2 {
     font-size: 28px;
     color: #008080;
+}
+
+/* Gallery Styling */
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.pet-item {
+    width: 200px;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    background-color: #fff;
+    transition: transform 0.2s;
+}
+
+.pet-item:hover {
+    transform: scale(1.05);
+}
+
+/* Link styling within pet item */
+.pet-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.pet-item a:hover .pet-name {
+    text-decoration: underline;
+}
+
+.pet-image {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
+}
+
+.pet-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
 }
 
 /* Footer Styling */
 footer {
     background-color: #333;
     color: #fff;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
-    margin-top: 30px;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .carousel-and-title {
-        flex-direction: column;
-    }
-
-    .welcome-text h1 {
-        font-size: 28px;
-    }
-
-    .welcome-text h3 {
-        font-size: 20px;
-    }
-
-    .search-container {
-        flex-direction: column;
-    }
-
-    .search-container input[type="text"],
-    .search-container select,
-    .search-container button {
-        max-width: 100%;
-        margin: 5px 0;
-    }
+    margin-top: 20px;
 }
