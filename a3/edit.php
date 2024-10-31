@@ -7,49 +7,66 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
-$pet_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$stmt = $conn->prepare("SELECT * FROM pets WHERE id = ? AND username = ?");
-$stmt->bind_param("is", $pet_id, $_SESSION['username']);
-$stmt->execute();
-$result = $stmt->get_result();
-$pet = $result->fetch_assoc();
-$stmt->close();
+if (isset($_GET['id'])) {
+    $pet_id = (int)$_GET['id'];
+    
+    // Fetch pet data
+    $stmt = $conn->prepare("SELECT * FROM pets WHERE id = ?");
+    $stmt->bind_param("i", $pet_id);
+    $stmt->execute();
+    $pet = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    
+    if (!$pet) {
+        echo "Pet not found.";
+        exit;
+    }
+    
+    // Check if the user owns the pet
+    if ($pet['username'] != $_SESSION['username']) {
+        echo "Unauthorized access.";
+        exit;
+    }
+}
 
-if ($pet):
-?>
-<div class="container">
-    <h2>Edit Pet</h2>
-    <form action="process_edit.php" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="pet_id" value="<?php echo $pet_id; ?>">
-        
-        <label for="pet_name">Pet Name:</label>
-        <input type="text" name="pet_name" value="<?php echo htmlspecialchars($pet['name']); ?>" required>
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($pet)) {
+    $pet_name = htmlspecialchars($_POST['pet_name']);
+    $type = htmlspecialchars($_POST['type']);
+    $description = htmlspecialchars($_POST['description']);
+    $age = (int)$_POST['age'];
+    $location = htmlspecialchars($_POST['location']);
+    $updated_image = $pet['image'];
 
-        <label for="type">Type:</label>
-        <select name="type" required>
-            <option value="cat" <?php if ($pet['type'] == 'cat') echo 'selected'; ?>>Cat</option>
-            <option value="dog" <?php if ($pet['type'] == 'dog') echo 'selected'; ?>>Dog</option>
-        </select>
+    // Handle file upload if a new image is provided
+    if (isset($_FILES['pet_image']) && $_FILES['pet_image']['error'] == 0) {
+        $target_dir = "images/";
+        $file_name = uniqid() . "_" . basename($_FILES["pet_image"]["name"]);
+        $target_file = $target_dir . $file_name;
 
-        <label for="description">Description:</label>
-        <textarea name="description" required><?php echo htmlspecialchars($pet['description']); ?></textarea>
+        if (move_uploaded_file($_FILES["pet_image"]["tmp_name"], $target_file)) {
+            // Delete old image
+            if (file_exists($target_dir . $pet['image'])) {
+                unlink($target_dir . $pet['image']);
+            }
+            $updated_image = $file_name;
+        } else {
+            echo "Failed to upload new image.";
+        }
+    }
 
-        <label for="pet_image">Replace Image:</label>
-        <input type="file" name="pet_image" accept="image/*">
-        
-        <label for="age">Age (months):</label>
-        <input type="number" name="age" value="<?php echo htmlspecialchars($pet['age']); ?>" required>
+    // Update pet data
+    $stmt = $conn->prepare("UPDATE pets SET name = ?, type = ?, description = ?, age = ?, location = ?, image = ? WHERE id = ?");
+    $stmt->bind_param("sssissi", $pet_name, $type, $description, $age, $location, $updated_image, $pet_id);
 
-        <label for="location">Location:</label>
-        <input type="text" name="location" value="<?php echo htmlspecialchars($pet['location']); ?>" required>
+    if ($stmt->execute()) {
+        header("Location: details.php?id=" . $pet_id);
+        exit;
+    } else {
+        echo "Error: " . $stmt->error;
+    }
 
-        <button type="submit">Update</button>
-    </form>
-</div>
-<?php
-else:
-    echo "<p>Unauthorized access.</p>";
-endif;
+    $stmt->close();
+}
 
 $conn->close();
 ?>
