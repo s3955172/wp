@@ -1,43 +1,41 @@
-<?php 
-include('includes/header.inc');
-include('includes/nav.inc');
+<?php
+session_start();
+include 'db_connect.inc';
+include 'header.inc';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = trim($_POST['username']);
-    $password = hash('sha256', $_POST['password']); 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = htmlspecialchars($_POST['username']);
+    $email = htmlspecialchars($_POST['email']);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
-    $stmt->execute(['username' => $username]);
-
-    if ($stmt->rowCount() > 0) {
-        echo "Username already exists.";
+    $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $username, $email, $password);
+    if ($stmt->execute()) {
+        $_SESSION['username'] = $username;
+        header("Location: index.php");
+        exit;
     } else {
-        $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
-        $stmt->execute(['username' => $username, 'password' => $password]);
-        echo "Registration successful. <a href='login.php'>Log in</a>.";
+        $error = "Registration failed. Please try again.";
     }
+    $stmt->close();
 }
 ?>
 
-<main class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4">
-            <h2 class="text-center">Register</h2>
-            <form action="register.php" method="POST">
-                <div class="mb-3">
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" id="username" class="form-control" required>
-                </div>
-                
-                <div class="mb-3">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" id="password" class="form-control" required>
-                </div>
-                
-                <button type="submit" class="btn btn-primary w-100">Register</button>
-            </form>
-        </div>
-    </div>
-</main>
+<div class="container">
+    <h2>Register</h2>
+    <form method="post" action="">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required>
 
-<?php include('includes/footer.inc'); ?>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+
+        <button type="submit">Register</button>
+        <?php if (isset($error)) echo "<p>$error</p>"; ?>
+    </form>
+</div>
+
+<?php include 'footer.inc'; ?>
