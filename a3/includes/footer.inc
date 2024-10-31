@@ -1,4 +1,4 @@
-<footer>
+<footer class="text-center p-3" style="background-color: #333; color: #fff;">
     <p>s3955172</p>
     <p>&copy; 2024 Pets Victoria. All rights reserved.</p>
 </footer>
